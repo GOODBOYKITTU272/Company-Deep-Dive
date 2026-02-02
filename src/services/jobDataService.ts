@@ -79,15 +79,17 @@ function buildJobsByDateUrl(date: string): string {
  */
 export async function fetchJobsByDate(date: string): Promise<JobDataResponse> {
     try {
-        // Use proxy URL (configured in vite.config.ts) to avoid CORS
+        // Use proxy URL in dev or configured base URL in prod
         const url = buildJobsByDateUrl(date);
-        console.log(`🔄 Fetching via proxy: ${url}`);
+        console.log(`🔄 Fetching: ${url}`);
 
         const response = await fetchWithRetry(url, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
             },
+            // Use cookies only for same-origin proxy requests
+            credentials: API_BASE_URL.startsWith('/') ? 'include' : 'omit'
         });
 
         if (!response.ok) {
@@ -310,3 +312,5 @@ export function calculateHiringScore(companyJobs: JobPosting[]): number {
     const rawScore = (scoreSum / companyJobs.length) * companyJobs.length;
     return Math.min(100, Math.round((rawScore / 50) * 100));
 }
+
+
