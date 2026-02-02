@@ -64,7 +64,13 @@ async function fetchWithRetry(
 }
 // ==================== END RETRY LOGIC ====================
 
-const API_BASE_URL = '/api';
+// Allow override in production (e.g. Vercel env), default to same-origin proxy
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || '/api').replace(/\/$/, '');
+
+function buildJobsByDateUrl(date: string): string {
+    const encodedDate = encodeURIComponent(date);
+    return `${API_BASE_URL}/jobs-by-date-and-role/?date=${encodedDate}`;
+}
 
 /**
  * Fetches job data for a specific date
@@ -74,7 +80,7 @@ const API_BASE_URL = '/api';
 export async function fetchJobsByDate(date: string): Promise<JobDataResponse> {
     try {
         // Use proxy URL (configured in vite.config.ts) to avoid CORS
-        const url = `/api/jobs-by-date-and-role/?date=${date}`;
+        const url = buildJobsByDateUrl(date);
         console.log(`🔄 Fetching via proxy: ${url}`);
 
         const response = await fetchWithRetry(url, {
