@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/jobs-by-date-and-role",
-      "destination": "/api/jobs-by-date-and-role"
+      "source": "/api/:path*",
+      "destination": "https://dashboard.apply-wizz.com/:path*"
     }
   ]
 }
