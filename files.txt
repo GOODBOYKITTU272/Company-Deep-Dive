@@ -1,0 +1,40 @@
+﻿
+
+    Directory: C:\Users\DELL\Downloads\Optimize Figma AI Prompts
+
+
+Mode                 LastWriteTime         Length Name                               
+----                 -------------         ------ ----                               
+d--h--        02-02-2026     17:15                .git                               
+d-----        02-02-2026     15:17                api                                
+d-----        02-02-2026     10:48                dist                               
+d-----        02-02-2026     18:13                node_modules                       
+d-----        02-02-2026     18:14                scripts                            
+d-----        02-02-2026     10:20                src                                
+d-----        02-02-2026     16:00                supabase                           
+-a----        02-02-2026     17:15            488 .gitignore                         
+-a----        02-02-2026     14:53           7456 API_DOCUMENTATION.md               
+-a----        02-02-2026     17:16           1934 convert_csv_to_sql.py              
+-a----        02-02-2026     15:16            515 database-indexes-jobrole.sql       
+-a----        02-02-2026     14:54           2241 database-indexes.sql               
+-a----        02-02-2026     18:07          11267 DATABASE_MIGRATION_GUIDE.md        
+-a----        02-02-2026     17:21            104 EXAMPLE_SUPABASE_CLIENT_API.js     
+-a----        02-02-2026     18:16              0 files.txt                          
+-a----        02-02-2026     17:05           8825 FINAL_SUPABASE_SETUP.sql           
+-a----        02-02-2026     17:17            198 IMPORT_ALL_JOBROLES.sql            
+-a----        02-02-2026     17:16           4722 IMPORT_JOBROLES.sql                
+-a----        02-02-2026     09:21            340 index.html                         
+-a----        02-02-2026     17:17           4137 jobroles.csv                       
+-a----        02-02-2026     15:45           8172 MIGRATION_GUIDE.md                 
+-a----        02-02-2026     18:13         158253 package-lock.json                  
+-a----        02-02-2026     18:13           2426 package.json                       
+-a----        02-02-2026     14:54           5165 QUICK_START.md                     
+-a----        02-02-2026     09:21            326 README.md                          
+-a----        02-02-2026     15:17           5957 ROLE_NORMALIZATION.md              
+-a----        02-02-2026     17:03           8669 SUPABASE_DATABASE_SETUP.sql        
+-a----        02-02-2026     16:02           2721 SUPABASE_SETUP.md                  
+-a----        02-02-2026     17:07           5343 SUPABASE_SETUP_CLEAN.sql           
+-a----        02-02-2026     13:53            129 vercel.json                        
+-a----        02-02-2026     10:30           2958 vite.config.ts                     
+
+

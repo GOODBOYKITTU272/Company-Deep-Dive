@@ -1,15 +1,19 @@
 import { useState } from 'react';
-import { useJobData } from '../hooks/useJobData';
 import { ChevronLeft, ChevronRight, Calendar } from 'lucide-react';
+import { useJobListings } from '../hooks/useJobListings';
 
 export function JobListings() {
-    const { jobData, loading, error, getCurrentDate } = useJobData();
     const [selectedRole, setSelectedRole] = useState<string | null>(null);
-    const [selectedDate, setSelectedDate] = useState(getCurrentDate());
+    const [selectedDate, setSelectedDate] = useState(() => {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    });
+
+    const { jobData, roles, loading, error } = useJobListings(selectedDate);
 
     // Format date for display
-    const formatDate = (date: Date) => {
-        return date.toLocaleDateString('en-US', {
+    const formatDate = (dateString: string) => {
+        return new Date(dateString).toLocaleDateString('en-US', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
@@ -21,13 +25,13 @@ export function JobListings() {
     const goToPreviousDay = () => {
         const newDate = new Date(selectedDate);
         newDate.setDate(newDate.getDate() - 1);
-        setSelectedDate(newDate);
+        setSelectedDate(newDate.toISOString().split('T')[0]);
     };
 
     const goToNextDay = () => {
         const newDate = new Date(selectedDate);
         newDate.setDate(newDate.getDate() + 1);
-        setSelectedDate(newDate);
+        setSelectedDate(newDate.toISOString().split('T')[0]);
     };
 
     if (loading) {
@@ -46,15 +50,15 @@ export function JobListings() {
             <div className="p-8">
                 <div className="bg-red-50 border border-red-200 rounded-lg p-6">
                     <h3 className="text-red-800 font-semibold text-lg mb-2">Error loading job data</h3>
-                    <p className="text-red-700 text-sm">{error instanceof Error ? error.message : 'Unknown error'}</p>
+                    <p className="text-red-700 text-sm">{error.message}</p>
                 </div>
             </div>
         );
     }
 
-    const roles = Object.keys(jobData || {});
     const currentRole = selectedRole || roles[0];
-    const currentJobs = (jobData as Record<string, any[]>)?.[currentRole] || [];
+    const currentRoleGroup = currentRole && jobData ? jobData[currentRole] : null;
+    const currentJobs = currentRoleGroup?.jobs || [];
 
     return (
         <div className="h-full flex flex-col bg-gray-50">
@@ -101,32 +105,36 @@ export function JobListings() {
                 <div className="w-80 bg-white border-r border-gray-200 overflow-y-auto">
                     <div className="p-4">
                         <h2 className="text-sm font-semibold text-gray-900 mb-3">Jobs by Role</h2>
-                        <div className="space-y-1">
-                            {roles.map((role) => {
-                                const jobCount = ((jobData as Record<string, any[]>)?.[role] || []).length;
-                                return (
-                                    <button
-                                        key={role}
-                                        onClick={() => setSelectedRole(role)}
-                                        className={`w-full text-left px-3 py-2 rounded-lg flex items-center justify-between transition-colors ${currentRole === role
-                                            ? 'bg-blue-50 text-blue-700'
-                                            : 'text-gray-700 hover:bg-gray-50'
-                                            }`}
-                                    >
-                                        <span className="text-sm font-medium truncate">{role}</span>
-                                        <span className="text-xs bg-gray-100 px-2 py-1 rounded-full ml-2">
-                                            {jobCount} jobs
-                                        </span>
-                                    </button>
-                                );
-                            })}
-                        </div>
+                        {roles.length === 0 ? (
+                            <p className="text-sm text-gray-500">No roles found for this date.</p>
+                        ) : (
+                            <div className="space-y-1">
+                                {roles.map((role) => {
+                                    const jobCount = jobData?.[role]?.count || 0;
+                                    return (
+                                        <button
+                                            key={role}
+                                            onClick={() => setSelectedRole(role)}
+                                            className={`w-full text-left px-3 py-2 rounded-lg flex items-center justify-between transition-colors ${currentRole === role
+                                                ? 'bg-blue-50 text-blue-700'
+                                                : 'text-gray-700 hover:bg-gray-50'
+                                                }`}
+                                        >
+                                            <span className="text-sm font-medium truncate">{role}</span>
+                                            <span className="text-xs bg-gray-100 px-2 py-1 rounded-full ml-2">
+                                                {jobCount} jobs
+                                            </span>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
                 </div>
 
                 {/* Job Details */}
                 <div className="flex-1 overflow-y-auto p-6">
-                    <h2 className="text-lg font-semibold text-gray-900 mb-4">{currentRole} Jobs</h2>
+                    <h2 className="text-lg font-semibold text-gray-900 mb-4">{currentRole || 'Jobs'} Jobs</h2>
 
                     {currentJobs.length === 0 ? (
                         <div className="text-center py-12">
@@ -134,9 +142,9 @@ export function JobListings() {
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            {currentJobs.map((job: any, index: number) => (
+                            {currentJobs.map((job, index) => (
                                 <div
-                                    key={index}
+                                    key={`${job.id}-${index}`}
                                     className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow"
                                 >
                                     <div className="flex items-start justify-between">
@@ -152,12 +160,14 @@ export function JobListings() {
                                             )}
                                         </div>
                                         <div className="flex flex-col items-end gap-2 ml-4">
-                                            <span className="text-xs text-gray-500">
-                                                {new Date(job.posted_date || job.indexed_at).toLocaleTimeString('en-US', {
-                                                    hour: '2-digit',
-                                                    minute: '2-digit',
-                                                })}
-                                            </span>
+                                            {job.posted_date && (
+                                                <span className="text-xs text-gray-500">
+                                                    {new Date(job.posted_date).toLocaleTimeString('en-US', {
+                                                        hour: '2-digit',
+                                                        minute: '2-digit',
+                                                    })}
+                                                </span>
+                                            )}
                                             <span className="px-3 py-1 text-xs font-medium bg-yellow-100 text-yellow-800 rounded-full">
                                                 PENDING
                                             </span>

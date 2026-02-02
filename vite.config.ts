@@ -58,9 +58,8 @@ export default defineConfig({
     open: true,
     proxy: {
       '/api': {
-        target: 'https://dashboard.apply-wizz.com',
+        target: 'http://localhost:4001',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
         secure: false,
       }
     }

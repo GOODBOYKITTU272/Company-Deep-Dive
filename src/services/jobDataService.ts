@@ -10,6 +10,9 @@ export interface JobPosting {
     location: string;
     posted_date: string;
     job_url: string;
+    uploadDate?: string;
+    yearsExpRequired?: string;
+    experienceLevel?: string;
 }
 
 export interface RoleData {

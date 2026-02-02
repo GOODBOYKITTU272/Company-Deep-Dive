@@ -3,15 +3,6 @@ import { CommandCenter } from './components/CommandCenter';
 import { JobListings } from './components/JobListings';
 import { CompanyHeatmap } from './components/CompanyHeatmap';
 import { CompanyDeepDive } from './components/CompanyDeepDive';
-import { RoleDemandRadar } from './components/RoleDemandRadar';
-import { SupplyVsDemand } from './components/SupplyVsDemand';
-import { ActionCenter } from './components/ActionCenter';
-import { CEOExecutiveSummary } from './components/CEOExecutiveSummary';
-import { FunnelPerformance } from './components/FunnelPerformance';
-import { SpeedPredictability } from './components/SpeedPredictability';
-import { RevenueROI } from './components/RevenueROI';
-import { WhereWeWin } from './components/WhereWeWin';
-import { RiskOpportunityRadar } from './components/RiskOpportunityRadar';
 import { Menu } from 'lucide-react';
 
 export default function App() {
@@ -24,16 +15,6 @@ export default function App() {
     { id: 'job-listings', label: 'Job Listings', icon: '📋' },
     { id: 'company-heatmap', label: 'Company Heatmap', icon: '🔥' },
     { id: 'company-deep-dive', label: 'Company Deep Dive', icon: '🔍' },
-    { id: 'role-demand', label: 'Role Demand Radar', icon: '📡' },
-    { id: 'supply-demand', label: 'Supply vs Demand', icon: '⚖️' },
-    { id: 'action-center', label: 'Action Center', icon: '✅' },
-    { id: 'divider', label: 'CEO DASHBOARD', icon: '' },
-    { id: 'ceo-summary', label: 'Executive Overview', icon: '👔' },
-    { id: 'funnel', label: 'Funnel Performance', icon: '🔻' },
-    { id: 'speed', label: 'Speed & Predictability', icon: '⚡' },
-    { id: 'revenue', label: 'Revenue & ROI', icon: '💰' },
-    { id: 'win-lose', label: 'Where We Win/Lose', icon: '🎯' },
-    { id: 'risk-opportunity', label: 'Risk & Opportunity Radar', icon: '🚨' },
   ];
 
   const renderScreen = () => {
@@ -52,24 +33,6 @@ export default function App() {
           companyName={selectedCompany || 'Microsoft'}
           onBack={() => setCurrentScreen('company-heatmap')}
         />;
-      case 'role-demand':
-        return <RoleDemandRadar />;
-      case 'supply-demand':
-        return <SupplyVsDemand />;
-      case 'action-center':
-        return <ActionCenter />;
-      case 'ceo-summary':
-        return <CEOExecutiveSummary />;
-      case 'funnel':
-        return <FunnelPerformance />;
-      case 'speed':
-        return <SpeedPredictability />;
-      case 'revenue':
-        return <RevenueROI />;
-      case 'win-lose':
-        return <WhereWeWin />;
-      case 'risk-opportunity':
-        return <RiskOpportunityRadar />;
       default:
         return <CommandCenter />;
     }
@@ -99,8 +62,8 @@ export default function App() {
                 key={screen.id}
                 onClick={() => setCurrentScreen(screen.id)}
                 className={`w-full text-left px-3 py-2 rounded-lg mb-1 flex items-center gap-3 transition-colors ${currentScreen === screen.id
-                    ? 'bg-blue-50 text-blue-700'
-                    : 'text-gray-700 hover:bg-gray-50'
+                  ? 'bg-blue-50 text-blue-700'
+                  : 'text-gray-700 hover:bg-gray-50'
                   }`}
               >
                 <span className="text-lg">{screen.icon}</span>
@@ -127,7 +90,14 @@ export default function App() {
             </h2>
           </div>
           <div className="flex items-center gap-4">
-            <div className="text-sm text-gray-500">Sunday, January 11, 2026</div>
+            <div className="text-sm text-gray-500">
+              {new Date().toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </div>
             <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-sm font-medium">
               AD
             </div>

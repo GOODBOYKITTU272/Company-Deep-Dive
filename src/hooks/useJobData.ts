@@ -142,15 +142,17 @@ export function useJobData(selectedDate?: string): UseJobDataResult {
             setLoading(true);
             setError(null);
 
+            /* 
             // Skip fetching if weekend - no data available
             if (isWeekend) {
-                console.log(`⏭️ Skipping data fetch - ${targetDate} is a weekend`);
+                console.log(`突破 Skipping data fetch - ${targetDate} is a weekend`);
                 setJobData(null);
                 setHistoricalData([]);
                 setCompanyMetrics([]);
                 setLoading(false);
                 return;
             }
+            */
 
             // ⚡ PERFORMANCE: Check cache first
             const cached = getCachedData(targetDate);
@@ -185,10 +187,14 @@ export function useJobData(selectedDate?: string): UseJobDataResult {
             // ⚡ PROGRESSIVE LOADING: Fetch today first for instant display
             const todayData = await fetchJobsByDate(targetDate);
             setJobData(todayData);
+            setHistoricalData([{ date: targetDate, data: todayData }]);
+            calculateMetrics([{ date: targetDate, data: todayData }]);
+            setLoading(false);
             console.log(`⚡ Today's data loaded in ${Math.round(performance.now() - startTime)}ms`);
 
             // Then fetch remaining days in parallel (background)
-            const promises = dates.map(date =>
+            const remainingDates = dates.filter(date => date !== targetDate);
+            const promises = remainingDates.map(date =>
                 fetchJobsByDate(date)
                     .then(data => ({ date, data }))
                     .catch(err => {
@@ -198,7 +204,10 @@ export function useJobData(selectedDate?: string): UseJobDataResult {
             );
 
             const results = await Promise.all(promises);
-            const validResults = results.filter(r => r !== null) as { date: string; data: JobDataResponse }[];
+            const validResults = [
+                { date: targetDate, data: todayData },
+                ...(results.filter(r => r !== null) as { date: string; data: JobDataResponse }[])
+            ];
 
             // Sort by date (newest first)
             validResults.sort((a, b) => b.date.localeCompare(a.date));

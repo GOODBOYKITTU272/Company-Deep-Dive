@@ -1,0 +1,157 @@
+
+================================================================================
+[2026-02-02T12:44:38.178Z] MAIN_PROCESS
+error: role "DELL" does not exist
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 1)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:379:9)
+Context: {
+  "stage": "MAIN_PROCESS"
+}
+
+================================================================================
+[2026-02-02T12:49:09.439Z] MAIN_PROCESS
+error: role "DELL" does not exist
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 1)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:379:9)
+Context: {
+  "stage": "MAIN_PROCESS"
+}
+
+================================================================================
+[2026-02-02T12:49:27.787Z] MAIN_PROCESS
+error: role "DELL" does not exist
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:379:9)
+Context: {
+  "stage": "MAIN_PROCESS"
+}
+
+================================================================================
+[2026-02-02T12:49:53.717Z] MAIN_PROCESS
+Error: read ECONNRESET
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 1)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:397:9)
+Context: {
+  "stage": "MAIN_PROCESS"
+}
+
+================================================================================
+[2026-02-02T12:50:29.106Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:340:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:463:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 0,
+  "batchSize": 2000
+}
+
+================================================================================
+[2026-02-02T12:50:43.376Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:340:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:463:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 2000,
+  "batchSize": 2000
+}
+
+================================================================================
+[2026-02-02T12:50:49.378Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:340:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:463:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 4000,
+  "batchSize": 2000
+}
+
+================================================================================
+[2026-02-02T12:50:54.786Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:340:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:463:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 6000,
+  "batchSize": 2000
+}
+
+================================================================================
+[2026-02-02T12:51:02.366Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:340:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:463:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 8000,
+  "batchSize": 2000
+}
+
+================================================================================
+[2026-02-02T12:55:14.427Z] MAIN_PROCESS
+error: role "DELL" does not exist
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 1)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:379:9)
+Context: {
+  "stage": "MAIN_PROCESS"
+}
+
+================================================================================
+[2026-02-02T12:55:48.947Z] MAIN_PROCESS
+Error: read ECONNRESET
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 1)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:382:9)
+Context: {
+  "stage": "MAIN_PROCESS"
+}
+
+================================================================================
+[2026-02-02T12:58:54.771Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:321:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:444:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 0,
+  "batchSize": 2000
+}
+
+================================================================================
+[2026-02-02T12:59:06.215Z] BATCH_INSERT
+error: bind message has 464 parameter formats but 0 parameters
+    at C:\Users\DELL\Downloads\Optimize Figma AI Prompts\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async migrateData (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:321:17)
+    at async runMigration (C:\Users\DELL\Downloads\Optimize Figma AI Prompts\scripts\migrate-karmafy-job.js:444:24)
+Context: {
+  "stage": "BATCH_INSERT",
+  "offset": 2000,
+  "batchSize": 2000
+}
