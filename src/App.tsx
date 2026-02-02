@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CommandCenter } from './components/CommandCenter';
+import { JobListings } from './components/JobListings';
 import { CompanyHeatmap } from './components/CompanyHeatmap';
 import { CompanyDeepDive } from './components/CompanyDeepDive';
 import { RoleDemandRadar } from './components/RoleDemandRadar';
@@ -20,6 +21,7 @@ export default function App() {
 
   const screens = [
     { id: 'command-center', label: 'Command Center', icon: '📊' },
+    { id: 'job-listings', label: 'Job Listings', icon: '📋' },
     { id: 'company-heatmap', label: 'Company Heatmap', icon: '🔥' },
     { id: 'company-deep-dive', label: 'Company Deep Dive', icon: '🔍' },
     { id: 'role-demand', label: 'Role Demand Radar', icon: '📡' },
@@ -38,16 +40,18 @@ export default function App() {
     switch (currentScreen) {
       case 'command-center':
         return <CommandCenter />;
+      case 'job-listings':
+        return <JobListings />;
       case 'company-heatmap':
         return <CompanyHeatmap onSelectCompany={(company) => {
           setSelectedCompany(company);
           setCurrentScreen('company-deep-dive');
         }} />;
       case 'company-deep-dive':
-        return <CompanyDeepDive 
-          companyName={selectedCompany || 'Microsoft'} 
+        return <CompanyDeepDive
+          companyName={selectedCompany || 'Microsoft'}
           onBack={() => setCurrentScreen('company-heatmap')}
-        />; 
+        />;
       case 'role-demand':
         return <RoleDemandRadar />;
       case 'supply-demand':
@@ -75,9 +79,8 @@ export default function App() {
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div
-        className={`${
-          sidebarOpen ? 'w-64' : 'w-0'
-        } transition-all duration-300 bg-white border-r border-gray-200 overflow-hidden flex flex-col`}
+        className={`${sidebarOpen ? 'w-64' : 'w-0'
+          } transition-all duration-300 bg-white border-r border-gray-200 overflow-hidden flex flex-col`}
       >
         <div className="p-6 border-b border-gray-200">
           <h1 className="font-semibold text-gray-900">APPLYWIZZ</h1>
@@ -95,11 +98,10 @@ export default function App() {
               <button
                 key={screen.id}
                 onClick={() => setCurrentScreen(screen.id)}
-                className={`w-full text-left px-3 py-2 rounded-lg mb-1 flex items-center gap-3 transition-colors ${
-                  currentScreen === screen.id
+                className={`w-full text-left px-3 py-2 rounded-lg mb-1 flex items-center gap-3 transition-colors ${currentScreen === screen.id
                     ? 'bg-blue-50 text-blue-700'
                     : 'text-gray-700 hover:bg-gray-50'
-                }`}
+                  }`}
               >
                 <span className="text-lg">{screen.icon}</span>
                 <span className="text-sm font-medium">{screen.label}</span>
