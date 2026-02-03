@@ -84,7 +84,7 @@ export default async function handler(req, res) {
                         company as "company_name",
                         location,
                         "datePosted" as "posted_date",
-                        "years_exp_required" as "experience_required",
+                        "yearsExpRequired" as "experience_required",
                         url as "job_url",
                         salary,
                         "work_type" as "work_type"
@@ -122,7 +122,7 @@ export default async function handler(req, res) {
                     company as "company_name",
                     location,
                     "datePosted" as "posted_date",
-                    "years_exp_required" as "experience_required",
+                    "yearsExpRequired" as "experience_required",
                     url as "job_url",
                     salary,
                     "work_type" as "work_type",

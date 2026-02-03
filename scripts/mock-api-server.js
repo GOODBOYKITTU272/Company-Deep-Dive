@@ -1,10 +1,9 @@
 const http = require('http');
 const url = require('url');
+const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env.local') });
 
 const port = 4001;
-
-// Mock environment
-process.env.DATABASE_URL = 'postgresql://postgres.molwtyvcjwtxubcahijx:HFJqnJ4et5vEbXlw@aws-1-ap-south-1.pooler.supabase.com:6543/postgres';
 
 async function startServer() {
     const server = http.createServer(async (req, res) => {
@@ -57,8 +56,8 @@ async function startServer() {
         }
     });
 
-    server.listen(port, () => {
-        console.log(`🚀 Native Mock API server running at http://localhost:${port}`);
+    server.listen(port, '127.0.0.1', () => {
+        console.log(`🚀 Native Mock API server running at http://127.0.0.1:${port}`);
     });
 }
 

@@ -11,8 +11,12 @@ let pool = null;
  */
 export function getPool() {
     if (!pool) {
+        const connStr = process.env.DATABASE_URL || '';
+        const host = connStr.split('@')[1] || 'localhost:5432';
+        console.log(`🔌 Initializing DB Pool pointing to: ${host.split('/')[0]}`);
+
         pool = new Pool({
-            connectionString: process.env.DATABASE_URL,
+            connectionString: connStr,
             ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
             max: 10, // Maximum pool size
             idleTimeoutMillis: 30000,

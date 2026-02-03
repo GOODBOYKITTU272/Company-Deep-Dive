@@ -93,9 +93,9 @@ export default async function handler(req, res) {
         const seniorityQuery = `
             SELECT 
                 title as role,
-                COUNT(CASE WHEN "years_exp_required" ILIKE '%0-4%' OR "experience_level" ILIKE '%Entry%' THEN 1 END) as junior,
-                COUNT(CASE WHEN "years_exp_required" ILIKE '%5-7%' OR "experience_level" ILIKE '%Mid%' THEN 1 END) as mid,
-                COUNT(CASE WHEN "years_exp_required" ILIKE '%8%' OR "years_exp_required" ILIKE '%11%' OR "experience_level" ILIKE '%Senior%' THEN 1 END) as senior
+                COUNT(CASE WHEN "yearsExpRequired" ILIKE '%0-4%' OR "experience_level" ILIKE '%Entry%' THEN 1 END) as junior,
+                COUNT(CASE WHEN "yearsExpRequired" ILIKE '%5-7%' OR "experience_level" ILIKE '%Mid%' THEN 1 END) as mid,
+                COUNT(CASE WHEN "yearsExpRequired" ILIKE '%8%' OR "yearsExpRequired" ILIKE '%11%' OR "experience_level" ILIKE '%Senior%' THEN 1 END) as senior
             FROM karmafy_job
             WHERE company ILIKE $1
             AND ("uploadDate" AT TIME ZONE 'UTC')::date >= $2

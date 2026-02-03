@@ -58,12 +58,12 @@ export default async function handler(req, res) {
         // Query 2: Trend data (last 7 days)
         const trendQuery = `
             SELECT 
-                "uploadDate"::date as date,
+                ("uploadDate" AT TIME ZONE 'UTC')::date as date,
                 COUNT(*) as jobs
             FROM karmafy_job
-            WHERE "uploadDate"::date >= $1
-            AND "uploadDate"::date <= $2
-            GROUP BY "uploadDate"::date
+            WHERE ("uploadDate" AT TIME ZONE 'UTC')::date >= $1
+            AND ("uploadDate" AT TIME ZONE 'UTC')::date <= $2
+            GROUP BY date
             ORDER BY date ASC
         `;
         const trendResult = await query(trendQuery, [_7daysAgo.toISOString().split('T')[0], targetDate]);
@@ -75,8 +75,8 @@ export default async function handler(req, res) {
                 COUNT(*) as "activeJobs",
                 COUNT(CASE WHEN "datePosted" >= NOW() - INTERVAL '24 hours' THEN 1 END) as "jobs24h"
             FROM karmafy_job
-            WHERE "uploadDate"::date >= $1
-            AND "uploadDate"::date <= $2
+            WHERE ("uploadDate" AT TIME ZONE 'UTC')::date >= $1
+            AND ("uploadDate" AT TIME ZONE 'UTC')::date <= $2
             GROUP BY company
             ORDER BY "activeJobs" DESC
             LIMIT 10
@@ -86,8 +86,8 @@ export default async function handler(req, res) {
         // Query 4: Calculate WoW growth
         const wowQuery = `
             SELECT 
-                COUNT(CASE WHEN "uploadDate"::date >= $1 AND "uploadDate"::date <= $2 THEN 1 END) as jobs_current,
-                COUNT(CASE WHEN "uploadDate"::date >= $3 AND "uploadDate"::date < $1 THEN 1 END) as jobs_previous
+                COUNT(CASE WHEN ("uploadDate" AT TIME ZONE 'UTC')::date >= $1 AND ("uploadDate" AT TIME ZONE 'UTC')::date <= $2 THEN 1 END) as jobs_current,
+                COUNT(CASE WHEN ("uploadDate" AT TIME ZONE 'UTC')::date >= $3 AND ("uploadDate" AT TIME ZONE 'UTC')::date < $1 THEN 1 END) as jobs_previous
             FROM karmafy_job
         `;
         const wowResult = await query(wowQuery, [
